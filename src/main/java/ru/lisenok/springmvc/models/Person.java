@@ -1,9 +1,6 @@
 package ru.lisenok.springmvc.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class Person {
     private int id;
@@ -17,6 +14,9 @@ public class Person {
     @NotEmpty(message = "email should not be empty")
     @Email(message = "email should be valid")
     private String email;
+
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "your address should be in this format: Country, City, 123456")
+    private String address;
 
     public Person() {
 
@@ -54,10 +54,19 @@ public class Person {
         this.email = email;
     }
 
-    public Person(int id, String name, int age, String email) {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Person(int id, String name, int age, String email, String address) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
 }
