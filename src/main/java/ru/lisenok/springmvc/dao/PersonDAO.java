@@ -10,6 +10,7 @@ import ru.lisenok.springmvc.models.Person;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDAO {
@@ -26,9 +27,9 @@ public class PersonDAO {
         return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<>(Person.class));
     }
 
-    public Person show(String email){
+    public Optional<Person> show(String email){
         return jdbcTemplate.query("SELECT * FROM Person WHERE email=?", new Object[]{email},
-                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
     public Person show(int id){

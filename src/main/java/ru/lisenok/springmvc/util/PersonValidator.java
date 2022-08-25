@@ -25,6 +25,10 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-
+        if (personDAO.show(person.getEmail()).isPresent()){
+            // помещаем в объект errors ошибку, три параметра: 1 - на каком поле в персон ошибка
+            // 2 - код ошибки, 3 - текст ошибки
+            errors.rejectValue("email", "", "sorry, this email is already taken ( ");
+        }
     }
 }
