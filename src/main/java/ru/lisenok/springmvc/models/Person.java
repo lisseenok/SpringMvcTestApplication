@@ -3,6 +3,7 @@ package ru.lisenok.springmvc.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -22,6 +23,9 @@ public class Person {
     @Min(value = 0, message = "age should be greater than 0")
     @Column(name = "age")
     private int age;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
 
 //    @NotEmpty(message = "email should not be empty")
 //    @Email(message = "email should be valid")
